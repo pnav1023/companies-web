@@ -1,20 +1,23 @@
 import streamlit as st
 from streamlit_agraph import agraph, Node, Edge, Config
+from data import ceos, companies
 
 st.title("Web of companies")
 
 nodes = []
 edges = []
 
-nodes.append(Node(id="Amazon",
-                  label="Amazon"))
-nodes.append(Node(id="Apple",
-                  label="Apple"))
-nodes.append(Node(id="ceoApple",
-                  label="tim cook"))
-edges.append(Edge(source="Apple",
-                  label="ceo",
-                  target="ceoApple"))
+for company in companies:
+    if company["id"] == "":
+        nodes.append(Node(id=company["label"],
+                  label=company["label"]))
+    else:   
+        nodes.append(Node(id=company["id"],
+                  label=company["label"]))
+    
+# edges.append(Edge(source="Apple",
+#                   label="ceo",
+#                   target="ceoApple"))
 
 config = Config(width=750,
                 height=950,
